@@ -1,0 +1,25 @@
+*{
+    padding: 0%;
+    border: 0;
+    box-sizing: border-box;
+}
+
+.box{
+    background-color: darkmagenta;
+    color: black;
+    width: 300px;
+    height: 200px;
+    padding: 10px;
+    margin: 10px;
+    justify-content: center;
+    align-items: center;
+    border: solid black;
+
+}
+
+.box:hover{
+    background-color: rgb(164, 139, 13);
+    color: black;
+}
+
+

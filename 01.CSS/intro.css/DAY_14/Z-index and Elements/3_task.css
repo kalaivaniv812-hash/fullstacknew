@@ -1,0 +1,57 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Grid Layout */
+.gallery{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    padding: 20px;
+}
+
+/* Image Box */
+.img-box{
+    position: relative;
+    overflow: hidden;
+}
+
+/* Image Style */
+.img-box img{
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    transition: 0.5s;
+}
+
+/* Hover Zoom Effect */
+.img-box:hover img{
+    transform: scale(1.2);
+}
+
+/* Overlay using pseudo element */
+.img-box::after{
+    content: "View Image";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0,0,0,0.5);
+    color: white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    opacity: 0;
+    transition: 0.5s;
+}
+
+/* Show overlay on hover */
+.img-box:hover::after{
+    opacity: 1;
+}

@@ -1,0 +1,30 @@
+*{
+    padding: 0%;
+    margin: 0%;
+    box-sizing: border-box;
+}
+
+
+
+
+
+.box{
+    width: 400px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    border-radius: 10px;
+    border: none;
+    margin:2px ;
+    transition: 0.9s;
+    
+}
+
+
+
+.box:hover{
+    background-color:rgb(184, 115, 115);
+    
+    transform:scale(0.9)
+}

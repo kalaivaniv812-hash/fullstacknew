@@ -1,0 +1,30 @@
+*{
+    padding: 0%;
+    margin: 0%;
+    box-sizing: border-box;
+}
+
+
+
+
+.card{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    margin: 5px;
+    border:double 4px;
+    background:gold;
+    color: black;
+
+}
+
+
+
+p::first-letter{
+     text-transform: uppercase;
+    font-size: 30px;
+    font-weight: bold;
+    color: rgb(1, 1, 11);
+}

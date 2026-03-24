@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>VP Petro | Fuel Delivery App</title>
+    <!-- Bootstrap 5 CSS + Icons + Google Fonts -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome 6 (free icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts: Poppins for modern look -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(145deg, #f0f4fa 0%, #e2e8f0 100%);
+            min-height: 100vh;
+            padding: 2rem 1rem;
+        }
+        /* main card container */
+        .app-container {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+        /* Logo + Branding with VP letter - PHOTO/IMAGE STYLE */
+        .vp-logo {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #0b2b3b, #1a4a5f);
+            width: 80px;
+            height: 80px;
+            border-radius: 32px;
+            box-shadow: 0 15px 25px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        /* Adding a subtle fuel drop photo effect - using gradient + icon as photo representation */
+        .vp-logo::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: radial-gradient(circle, rgba(255,180,71,0.3) 0%, rgba(255,100,50,0.1) 100%);
+            border-radius: 32px;
+            z-index: 0;
+        }
+        .vp-logo span {
+            font-size: 2.8rem;
+            font-weight: 800;
+            background: linear-gradient(120deg, #FFD966, #FFB347);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 2px;
+            text-shadow: none;
+            position: relative;
+            z-index: 2;
+        }
+        /* Add a fuel drop icon as photo element inside logo */
+        .vp-logo .fuel-icon-overlay {
+            position: absolute;
+            bottom: 5px;
+            right: 8px;
+            font-size: 1.2rem;
+            color: #FFB347;
+            opacity: 0.8;
+            z-index: 2;
+            filter: drop-shadow(0 1px 1px rgba(0,0,0,0.2));
+        }
+        /* alternative photo-style badge with image representation */
+        .vp-photo-badge {
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(4px);
+            border-radius: 50px;
+            padding: 5px 12px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+        .brand-text {
+            font-weight: 800;
+            font-size: 1.9rem;
+            background: linear-gradient(135deg, #1e3c4c, #2a5f74);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+        }
+        .badge-fuel {
+            background-color: #ff8c42;
+            color: #1e2a32;
+            font-weight: 600;
+            padding: 6px 14px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+        }
+        /* info card */
+        .info-card {
+            background: white;
+            border-radius: 32px;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+            border: none;
+        }
+        .distance-badge {
+            background: #1f6e43;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 60px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .btn-delivery {
+            background: linear-gradient(95deg, #F4A261, #E76F51);
+            border: none;
+            padding: 12px 20px;
+            font-weight: 700;
+            border-radius: 40px;
+            transition: all 0.2s;
+            color: white;
+            box-shadow: 0 8px 14px rgba(231,111,81,0.3);
+        }
+        .btn-delivery:hover:not(:disabled) {
+            transform: translateY(-2px);
+            background: linear-gradient(95deg, #E76F51, #F4A261);
+            box-shadow: 0 12px 20px rgba(231,111,81,0.4);
+        }
+        .btn-delivery:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .fuel-type-btn {
+            border: 2px solid #e2e8f0;
+            background: white;
+            border-radius: 60px;
+            padding: 10px 20px;
+            font-weight: 500;
+            transition: all 0.2s;
+            color: #2d3e50;
+        }
+        .fuel-type-btn.active-fuel {
+            background: #1e4a6e;
+            border-color: #1e4a6e;
+            color: white;
+            box-shadow: 0 5px 12px rgba(30,74,110,0.2);
+        }
+        .fuel-quantity {
+            background: #f8fafc;
+            border-radius: 40px;
+            padding: 8px 12px;
+            font-weight: 600;
+        }
+        .order-summary {
+            background: #fef9e6;
+            border-radius: 28px;
+            padding: 1.2rem;
+        }
+        footer {
+            font-size: 0.8rem;
+            text-align: center;
+            margin-top: 3rem;
+            color: #4b6a7c;
+        }
+        /* VP image gallery style - photo decoration */
+        .vp-photo-showcase {
+            background: linear-gradient(120deg, #ffe6d5, #fff0e6);
+            border-radius: 28px;
+            padding: 12px 16px;
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border: 1px solid rgba(231,111,81,0.2);
+        }
+        .vp-photo-showcase i {
+            font-size: 2rem;
+            color: #E76F51;
+        }
+        .fuel-delivery-img {
+            width: 50px;
+            height: 50px;
+            background: #1e4a6e;
+            border-radius: 20px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #FFD966;
+            font-size: 1.8rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        @media (max-width: 768px) {
+            .vp-logo {
+                width: 65px;
+                height: 65px;
+            }
+            .vp-logo span {
+                font-size: 2.2rem;
+            }
+            .brand-text {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="app-container">
+    <!-- header with VP logo and brand - PHOTO / IMAGE ENHANCED -->
+    <div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
+        <div class="d-flex align-items-center gap-3">
+            <div class="vp-logo">
+                <span>VP</span>
+                <i class="fas fa-tint fuel-icon-overlay"></i>
+            </div>
+            <div>
+                <h1 class="brand-text mb-0">VP Petro</h1>
+                <p class="text-muted small mb-0"><i class="fas fa-truck"></i> Fuel at your doorstep | <i class="fas fa-image"></i> VP Photo ID</p>
+            </div>
+        </div>
+        <div class="mt-2 mt-sm-0 d-flex gap-2">
+            <span class="badge-fuel"><i class="fas fa-gas-pump me-1"></i> 24/7 Emergency</span>
+            <span class="badge-fuel bg-dark text-white"><i class="fas fa-camera"></i> VP Verified</span>
+        </div>
+    </div>
+
+    <!-- Main row: left side info + order, right side order summary / location -->
+    <div class="row g-4">
+        <!-- LEFT COLUMN: Delivery eligibility + form -->
+        <div class="col-lg-7">
+            <div class="info-card p-4 p-lg-5">
+                <!-- PHOTO / IMAGE SECTION - VP Fuel delivery visual -->
+                <div class="vp-photo-showcase mb-4">
+                    <div class="fuel-delivery-img">
+                        <i class="fas fa-gas-pump"></i>
+                    </div>
+                    <div>
+                        <strong class="text-dark"><i class="fas fa-image me-1"></i> VP Petro Fleet</strong>
+                        <p class="small mb-0 text-secondary">Licensed doorstep delivery | ISO certified fuel</p>
+                    </div>
+                    <i class="fas fa-motorcycle fa-2x ms-auto" style="color:#E76F51;"></i>
+                </div>
+                
+                <!-- Distance / location simulation section -->
+                <div class="d-flex flex-wrap justify-content-between align-items-center border-bottom pb-3 mb-4">
+                    <div>
+                        <h5 class="fw-bold"><i class="fas fa-map-marker-alt me-2 text-danger"></i> Your delivery zone</h5>
+                        <p class="text-secondary mb-0">We deliver if no petrol bunk within <strong>10 km radius</strong></p>
+                    </div>
+                    <div class="distance-badge mt-2 mt-sm-0">
+                        <i class="fas fa-road"></i> <span id="nearestBunkDistance">8.2 km</span> to nearest bunk
+                    </div>
+                </div>
+
+                <!-- Dynamic eligibility alert -->
+                <div id="eligibilityAlert" class="alert alert-success rounded-4 mb-4">
+                    <i class="fas fa-check-circle me-2"></i> <strong>Eligible for delivery!</strong> Nearest petrol bunk is beyond 10km? We got you! (Current distance: <span id="displayDistanceKm">8.2</span> km)
+                </div>
+
+                <!-- fuel order form -->
+                <h4 class="fw-bold mb-3"><i class="fas fa-truck-fast me-2" style="color:#E76F51;"></i> Request delivery</h4>
+                <form id="fuelDeliveryForm">
+                    <div class="row g-3">
+                        <!-- Full name -->
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold"><i class="far fa-user"></i> Full name</label>
+                            <input type="text" class="form-control form-control-lg rounded-4" id="customerName" placeholder="John Carter" required>
+                        </div>
+                        <!-- Phone -->
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold"><i class="fas fa-phone-alt"></i> Mobile number</label>
+                            <input type="tel" class="form-control form-control-lg rounded-4" id="customerPhone" placeholder="+91 98765 43210" required>
+                        </div>
+                        <!-- Address full -->
+                        <div class="col-12">
+                            <label class="form-label fw-semibold"><i class="fas fa-location-dot"></i> Delivery address</label>
+                            <input type="text" class="form-control form-control-lg rounded-4" id="deliveryAddress" placeholder="House No, Street, Landmark" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold"><i class="fas fa-city"></i> City</label>
+                            <input type="text" class="form-control rounded-4" id="city" placeholder="Mumbai / Delhi / etc" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold"><i class="fas fa-map-pin"></i> Pincode</label>
+                            <input type="text" class="form-control rounded-4" id="pincode" placeholder="110001" required>
+                        </div>
+                        
+                        <!-- Fuel type selection (dynamic) -->
+                        <div class="col-12">
+                            <label class="form-label fw-semibold"><i class="fas fa-gas-pump"></i> Select fuel type</label>
+                            <div class="d-flex flex-wrap gap-3 mt-2">
+                                <button type="button" class="fuel-type-btn active-fuel" data-fuel="Petrol">⛽ Petrol (₹105/L)</button>
+                                <button type="button" class="fuel-type-btn" data-fuel="Diesel">🛢️ Diesel (₹92/L)</button>
+                                <button type="button" class="fuel-type-btn" data-fuel="Premium Petrol">⚡ Premium Petrol (₹118/L)</button>
+                            </div>
+                            <input type="hidden" id="selectedFuelType" value="Petrol">
+                            <input type="hidden" id="fuelPricePerLiter" value="105">
+                        </div>
+                        
+                        <!-- Quantity slider + input -->
+                        <div class="col-12 mt-3">
+                            <label class="form-label fw-semibold"><i class="fas fa-charging-station"></i> Quantity (Liters)</label>
+                            <div class="d-flex align-items-center gap-3 flex-wrap">
+                                <input type="range" id="fuelLitersRange" class="form-range w-75" min="1" max="50" step="1" value="10">
+                                <div class="fuel-quantity">
+                                    <span id="litersValue">10</span> L
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Extra note: delivery fee + photo disclaimer -->
+                        <div class="col-12 mt-2">
+                            <div class="bg-light p-3 rounded-4 d-flex justify-content-between">
+                                <span><i class="fas fa-truck"></i> Delivery charge (within 25km)</span>
+                                <span class="fw-bold">₹49 only</span>
+                            </div>
+                            <div class="small text-muted mt-2"><i class="fas fa-camera-retro"></i> VP Photo ID verified delivery partner</div>
+                        </div>
+                        
+                        <div class="col-12 mt-3">
+                            <button type="submit" class="btn btn-delivery w-100 btn-lg" id="placeOrderBtn">
+                                <i class="fas fa-motorcycle me-2"></i> Place fuel delivery order
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- RIGHT COLUMN: Order preview + location simulation (nearest bunk) -->
+        <div class="col-lg-5">
+            <div class="info-card p-4 h-100">
+                <div class="d-flex align-items-center gap-2 mb-3">
+                    <i class="fas fa-receipt fa-2x" style="color:#2a5f74;"></i>
+                    <h3 class="fw-bold mb-0">Order summary</h3>
+                    <!-- VP small photo emblem -->
+                    <div class="ms-auto bg-warning bg-opacity-25 rounded-circle p-2">
+                        <i class="fas fa-image text-dark"></i>
+                    </div>
+                </div>
+                <div class="order-summary mb-4">
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Fuel type:</span>
+                        <span class="fw-bold" id="summaryFuel">Petrol</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Quantity:</span>
+                        <span class="fw-bold" id="summaryLiters">10 L</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Fuel cost:</span>
+                        <span class="fw-bold" id="summaryFuelCost">₹1050</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Delivery fee:</span>
+                        <span class="fw-bold">₹49</span>
+                    </div>
+                    <hr class="my-2">
+                    <div class="d-flex justify-content-between fs-5">
+                        <span>Total payable:</span>
+                        <span class="fw-bold text-success" id="summaryTotal">₹1099</span>
+                    </div>
+                </div>
+                
+                <!-- Live distance adjuster: Simulate location for nearest bunk -->
+                <div class="mt-2">
+                    <label class="fw-semibold mb-2"><i class="fas fa-location-crosshairs"></i> Simulate nearest petrol bunk distance</label>
+                    <div class="d-flex align-items-center gap-3">
+                        <input type="range" id="distanceSlider" class="form-range" min="0" max="25" step="0.5" value="8.2">
+                        <span class="badge bg-dark rounded-pill px-3 py-2"><span id="sliderDistanceValue">8.2</span> km</span>
+                    </div>
+                    <p class="small text-muted mt-2">💡 Move slider: if distance >= 10km, delivery is AVAILABLE. If less than 10km, service will be restricted (no petrol bunk nearby rule).</p>
+                    <div id="distanceWarning" class="alert alert-warning mt-2 d-none rounded-4">
+                        <i class="fas fa-exclamation-triangle"></i> ⚠️ Petrol bunk found within <span id="warningKm">0</span> km. According to our policy, we deliver ONLY if no bunk within 10km. Adjust distance to ≥10km to enable order.
+                    </div>
+                </div>
+                
+                <!-- recent order success message (hidden) -->
+                <div id="orderSuccessToast" class="alert alert-success mt-4 rounded-4 d-none">
+                    <i class="fas fa-check-circle me-2"></i> <strong>Order confirmed!</strong> 🚛 Fuel will arrive at your doorstep within 30 mins. Thank you for choosing VP Petro.
+                </div>
+                
+                <!-- VP logo reappearance with enhanced photo feel -->
+                <div class="text-center mt-4 pt-2">
+                    <div class="vp-logo mx-auto mb-2" style="width: 60px; height: 60px; border-radius: 24px;">
+                        <span style="font-size:2rem;">VP</span>
+                        <i class="fas fa-tint fuel-icon-overlay" style="font-size: 0.9rem;"></i>
+                    </div>
+                    <p class="text-muted small mb-0">"Fuel when you need, wherever you are"</p>
+                    <div class="mt-2 d-flex justify-content-center gap-3">
+                        <i class="fas fa-id-card text-secondary"></i>
+                        <i class="fas fa-gas-pump text-secondary"></i>
+                        <span class="badge bg-light text-dark">VP Photo Certified</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <i class="fas fa-shield-alt"></i> VP Petro | Safe & certified doorstep fuel delivery | 24x7 support | <i class="fas fa-image"></i> VP Visual Identity
+    </footer>
+</div>
+
+<script>
+    // DOM elements
+    const distanceSlider = document.getElementById('distanceSlider');
+    const sliderDistanceValue = document.getElementById('sliderDistanceValue');
+    const nearestBunkDistanceSpan = document.getElementById('nearestBunkDistance');
+    const eligibilityAlertDiv = document.getElementById('eligibilityAlert');
+    const distanceWarningDiv = document.getElementById('distanceWarning');
+    const displayDistanceKmSpan = document.getElementById('displayDistanceKm');
+    const placeOrderBtn = document.getElementById('placeOrderBtn');
+    const fuelDeliveryForm = document.getElementById('fuelDeliveryForm');
+
+    // Fuel type elements
+    const fuelBtns = document.querySelectorAll('.fuel-type-btn');
+    const selectedFuelTypeInput = document.getElementById('selectedFuelType');
+    const fuelPricePerLiterInput = document.getElementById('fuelPricePerLiter');
+    const summaryFuelSpan = document.getElementById('summaryFuel');
+    const litersRange = document.getElementById('fuelLitersRange');
+    const litersValueSpan = document.getElementById('litersValue');
+    const summaryLitersSpan = document.getElementById('summaryLiters');
+    const summaryFuelCostSpan = document.getElementById('summaryFuelCost');
+    const summaryTotalSpan = document.getElementById('summaryTotal');
+
+    // Pricing map (₹ per liter)
+    const fuelPrices = {
+        'Petrol': 105,
+        'Diesel': 92,
+        'Premium Petrol': 118
+    };
+
+    let currentFuel = 'Petrol';
+    let currentPrice = 105;
+    let currentLiters = 10;
+    let deliveryFee = 49;
+    let currentDistance = 8.2;   // km to nearest bunk
+
+    // helper: update eligibility UI based on distance threshold (10km rule)
+    function updateEligibilityByDistance(distance) {
+        const isEligible = distance >= 10;
+        // update display spans
+        nearestBunkDistanceSpan.innerText = distance.toFixed(1) + " km";
+        displayDistanceKmSpan.innerText = distance.toFixed(1);
+        
+        if (isEligible) {
+            eligibilityAlertDiv.className = "alert alert-success rounded-4 mb-4";
+            eligibilityAlertDiv.innerHTML = `<i class="fas fa-check-circle me-2"></i> <strong>✅ Eligible for delivery!</strong> No petrol bunk within ${distance.toFixed(1)} km (≥10km). We will deliver directly to your address. <i class="fas fa-image ms-1"></i> VP verified`;
+            distanceWarningDiv.classList.add('d-none');
+            // enable order button
+            placeOrderBtn.disabled = false;
+            placeOrderBtn.style.opacity = '1';
+            placeOrderBtn.style.cursor = 'pointer';
+        } else {
+            eligibilityAlertDiv.className = "alert alert-danger rounded-4 mb-4";
+            eligibilityAlertDiv.innerHTML = `<i class="fas fa-times-circle me-2"></i> <strong>❌ Not eligible</strong> Nearest petrol bunk is only ${distance.toFixed(1)} km away (within 10km). VP Petro delivers only when no station is within 10km radius. Please move slider to ≥10km to simulate remote area.`;
+            distanceWarningDiv.classList.remove('d-none');
+            distanceWarningDiv.querySelector('#warningKm').innerText = distance.toFixed(1);
+            // disable order button
+            placeOrderBtn.disabled = true;
+            placeOrderBtn.style.opacity = '0.6';
+            placeOrderBtn.style.cursor = 'not-allowed';
+        }
+    }
+
+    // update all price calculations
+    function updatePriceSummary() {
+        const fuelCost = currentPrice * currentLiters;
+        const total = fuelCost + deliveryFee;
+        summaryFuelCostSpan.innerText = `₹${fuelCost}`;
+        summaryTotalSpan.innerText = `₹${total}`;
+        summaryLitersSpan.innerText = `${currentLiters} L`;
+        summaryFuelSpan.innerText = currentFuel;
+    }
+
+    // handle fuel selection button
+    function setActiveFuel(fuelType) {
+        currentFuel = fuelType;
+        currentPrice = fuelPrices[fuelType];
+        selectedFuelTypeInput.value = fuelType;
+        fuelPricePerLiterInput.value = currentPrice;
+        summaryFuelSpan.innerText = fuelType;
+        
+        // update active button UI
+        fuelBtns.forEach(btn => {
+            const btnFuel = btn.getAttribute('data-fuel');
+            if (btnFuel === fuelType) {
+                btn.classList.add('active-fuel');
+            } else {
+                btn.classList.remove('active-fuel');
+            }
+        });
+        updatePriceSummary();
+    }
+
+    // liters update
+    function updateLiters(value) {
+        currentLiters = parseInt(value);
+        litersValueSpan.innerText = currentLiters;
+        litersRange.value = currentLiters;
+        updatePriceSummary();
+    }
+
+    // distance slider event
+    function handleDistanceChange() {
+        let val = parseFloat(distanceSlider.value);
+        currentDistance = val;
+        sliderDistanceValue.innerText = currentDistance.toFixed(1);
+        updateEligibilityByDistance(currentDistance);
+    }
+
+    // initialize order summary and check eligibility on page load
+    function init() {
+        // set initial distance
+        distanceSlider.value = "8.2";
+        handleDistanceChange();
+        
+        // set default liters
+        litersRange.value = 10;
+        updateLiters(10);
+        
+        // set default fuel: Petrol active
+        setActiveFuel('Petrol');
+        
+        // add event listeners to fuel buttons
+        fuelBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const fuelType = btn.getAttribute('data-fuel');
+                setActiveFuel(fuelType);
+            });
+        });
+        
+        // liters slider event
+        litersRange.addEventListener('input', (e) => {
+            updateLiters(e.target.value);
+        });
+        
+        // distance slider event
+        distanceSlider.addEventListener('input', handleDistanceChange);
+        
+        // Form submission
+        fuelDeliveryForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            // Check eligibility again (double-check)
+            if (currentDistance < 10) {
+                alert("❌ Delivery not allowed! Nearest petrol bunk is within 10km. We only deliver if no bunk is within 10km radius.");
+                return;
+            }
+            
+            // Collect user details
+            const name = document.getElementById('customerName').value.trim();
+            const phone = document.getElementById('customerPhone').value.trim();
+            const address = document.getElementById('deliveryAddress').value.trim();
+            const city = document.getElementById('city').value.trim();
+            const pincode = document.getElementById('pincode').value.trim();
+            
+            if (!name || !phone || !address || !city || !pincode) {
+                alert("Please fill all delivery details (Name, Phone, Address, City, Pincode).");
+                return;
+            }
+            
+            if (phone.length < 8) {
+                alert("Please enter a valid mobile number.");
+                return;
+            }
+            
+            // prepare order summary message
+            const totalAmount = (currentPrice * currentLiters) + deliveryFee;
+            const orderDetails = `🛢️ VP Petro Delivery Order ✅\n\nName: ${name}\nPhone: ${phone}\nAddress: ${address}, ${city} - ${pincode}\nFuel: ${currentFuel} | ${currentLiters} Liters\nFuel cost: ₹${currentPrice * currentLiters}\nDelivery Fee: ₹${deliveryFee}\nTotal: ₹${totalAmount}\nNearest bunk distance: ${currentDistance.toFixed(1)} km (Eligible)\n\n🚛 Your fuel is on the way! \n📸 VP Photo Verified Delivery`;
+            
+            // show success message on right panel
+            const successToast = document.getElementById('orderSuccessToast');
+            successToast.classList.remove('d-none');
+            successToast.innerHTML = `<i class="fas fa-check-circle me-2"></i> <strong>Order confirmed, ${name}!</strong> 🚛 ${currentFuel} (${currentLiters} L) will be delivered to ${address} within 30 mins. Total ₹${totalAmount}. <i class="fas fa-image"></i> VP Photo ID attached. Thank you for trusting VP Petro.`;
+            
+            // also alert user to give satisfaction
+            alert(`✅ Order placed successfully!\n\n${orderDetails}\n\nOur delivery executive (VP verified) will contact you shortly.`);
+            
+            // optional: scroll to success toast
+            successToast.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            
+            // small auto-hide effect after 6 seconds?
+            setTimeout(() => {
+                // just keep visible for user but not disturbing
+            }, 200);
+        });
+        
+        // Additional check: if distance changes while form is being filled, re-evaluate
+    }
+    
+    // run init
+    init();
+    
+    // manual sync for real-time order summary update
+    function syncAll() {
+        updatePriceSummary();
+    }
+    
+    window.addEventListener('load', () => {
+        syncAll();
+    });
+</script>
+</body>
+</html>

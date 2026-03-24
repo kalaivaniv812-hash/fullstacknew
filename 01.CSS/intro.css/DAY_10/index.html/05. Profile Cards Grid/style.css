@@ -1,0 +1,21 @@
+.mani{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.card{
+    width: 90px;
+    display: flex;
+    justify-content: center;
+    height: 150px;
+    padding: 20px;
+    border: 30px;
+}
+
+.card img{
+
+}
+

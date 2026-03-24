@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>FuelExpress | Instant Doorstep Petrol Delivery</title>
+    <!-- Bootstrap 5.3 + Icons + Fonts + Animations -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        body {
+            background: #f8fafc;
+            overflow-x: hidden;
+        }
+        /* Premium Gradient & Effects */
+        .premium-gradient {
+            background: linear-gradient(135deg, #0a2e2a 0%, #0f4c3a 50%, #1b6e54 100%);
+        }
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        .btn-fuel-primary {
+            background: linear-gradient(135deg, #f5b042 0%, #f39c12 100%);
+            border: none;
+            color: #1a2a28;
+            font-weight: 700;
+            padding: 12px 28px;
+            border-radius: 60px;
+            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            box-shadow: 0 8px 20px rgba(243, 156, 18, 0.25);
+        }
+        .btn-fuel-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(243, 156, 18, 0.35);
+            background: linear-gradient(135deg, #ffc107, #f39c12);
+            color: #0a2e2a;
+        }
+        .btn-fuel-outline {
+            background: transparent;
+            border: 2px solid #f5b042;
+            color: #f5b042;
+            font-weight: 600;
+            border-radius: 60px;
+            transition: 0.25s;
+        }
+        .btn-fuel-outline:hover {
+            background: #f5b042;
+            color: #1a2a28;
+            transform: scale(1.02);
+        }
+        .fuel-card {
+            background: white;
+            border-radius: 32px;
+            border: none;
+            transition: all 0.4s ease;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+        .fuel-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 30px 45px -15px rgba(0, 0, 0, 0.15);
+        }
+        .badge-delivery {
+            background: #e8f5e9;
+            color: #2b7a4b;
+            border-radius: 50px;
+            padding: 6px 14px;
+            font-weight: 700;
+            font-size: 0.75rem;
+        }
+        .price-tag {
+            font-size: 1.9rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #f5b042, #e67e22);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .hero-section-new {
+            background: linear-gradient(120deg, #0a2f28 0%, #166d52 100%);
+            border-radius: 0 0 60px 60px;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-section-new::before {
+            content: '';
+            position: absolute;
+            top: -30%;
+            right: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(245,176,66,0.15) 0%, rgba(0,0,0,0) 70%);
+            border-radius: 50%;
+        }
+        .map-mock-premium {
+            background: linear-gradient(145deg, #1e3a34, #0f2c26);
+            border-radius: 32px;
+            padding: 20px;
+            box-shadow: 0 20px 35px -10px rgba(0,0,0,0.2);
+        }
+        .fuel-station-badge {
+            background: rgba(255,255,255,0.12);
+            backdrop-filter: blur(8px);
+            border-radius: 20px;
+            padding: 6px 14px;
+        }
+        .progress-delivery {
+            height: 6px;
+            border-radius: 10px;
+            background: #e2e8f0;
+        }
+        .live-track {
+            background: #fff9ef;
+            border-left: 5px solid #f5b042;
+        }
+        .modal-premium .modal-content {
+            border-radius: 40px;
+            border: none;
+            overflow: hidden;
+        }
+        .glow-text {
+            text-shadow: 0 2px 10px rgba(245,176,66,0.3);
+        }
+        footer {
+            background: #0a241f;
+            border-radius: 40px 40px 0 0;
+        }
+        @keyframes pulse-green {
+            0% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.4); }
+            70% { box-shadow: 0 0 0 12px rgba(46, 204, 113, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0); }
+        }
+        .pulse-animation {
+            animation: pulse-green 1.5s infinite;
+        }
+        .order-tracking-card {
+            background: linear-gradient(125deg, #fff8f0, white);
+        }
+        input, select, .form-control {
+            border-radius: 60px !important;
+            border: 1.5px solid #e2e8f0;
+            padding: 12px 20px;
+        }
+        input:focus {
+            border-color: #f5b042 !important;
+            box-shadow: 0 0 0 4px rgba(245,176,66,0.2) !important;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Premium Navbar -->
+<nav class="navbar navbar-expand-lg glass-nav sticky-top py-3">
+    <div class="container">
+        <a class="navbar-brand fw-extrabold d-flex align-items-center gap-2" href="#">
+            <div class="bg-warning rounded-circle p-2" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;">
+                <i class="bi bi-fuel-pump-fill text-dark fs-5"></i>
+            </div>
+            <span class="fs-4 fw-bold" style="color: #0f4c3a;">Fuel<span style="color: #f5b042;">Express</span></span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#premiumNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="premiumNav">
+            <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-2">
+                <li class="nav-item"><a class="nav-link fw-semibold active" href="#">Home</a></li>
+                <li class="nav-item"><a class="nav-link fw-semibold" href="#">Live Tracking</a></li>
+                <li class="nav-item"><a class="nav-link fw-semibold" href="#">Offers</a></li>
+                <li class="nav-item"><a class="nav-link fw-semibold" href="#">Support 24/7</a></li>
+            </ul>
+            <button class="btn btn-fuel-primary px-4" id="premiumLoginBtn" data-bs-toggle="modal" data-bs-target="#loginPremiumModal">
+                <i class="bi bi-person-fill-check me-2"></i>Login / Signup
+            </button>
+        </div>
+    </div>
+</nav>
+
+<!-- Hero Section - No Bunk? Delivery in 10min -->
+<section class="hero-section-new pt-5 pb-5 mb-5">
+    <div class="container py-4">
+        <div class="row align-items-center">
+            <div class="col-lg-7" data-aos="fade-right">
+                <div class="d-flex gap-2 mb-4">
+                    <span class="fuel-station-badge text-white"><i class="bi bi-exclamation-triangle-fill me-1 text-warning"></i> No petrol bunk nearby?</span>
+                    <span class="fuel-station-badge text-white"><i class="bi bi-truck"></i> 10-Minute Emergency Delivery</span>
+                </div>
+                <h1 class="display-4 fw-bold text-white">Fuel at your doorstep<br>in <span class="text-warning glow-text">under 10 minutes</span></h1>
+                <p class="lead text-white-50 mt-3">Running out of fuel? We've got you covered. India's fastest doorstep fuel delivery — login, tap buy, and relax.</p>
+                <div class="mt-4 d-flex flex-wrap gap-3">
+                    <button class="btn btn-fuel-primary px-5 py-3 fs-6 fw-bold" id="heroOrderBtn"><i class="bi bi-cart-fill me-2"></i> Order Fuel Now</button>
+                    <button class="btn btn-outline-light rounded-pill px-4"><i class="bi bi-play-circle"></i> How it works</button>
+                </div>
+                <div class="mt-4 d-flex gap-4">
+                    <div><i class="bi bi-check-circle-fill text-warning"></i> <span class="text-white">Cashless Payment</span></div>
+                    <div><i class="bi bi-shield-check text-warning"></i> <span class="text-white">ISO Certified Fuel</span></div>
+                </div>
+            </div>
+            <div class="col-lg-5 mt-4 mt-lg-0" data-aos="fade-left">
+                <div class="map-mock-premium text-center">
+                    <i class="bi bi-geo-alt-fill text-warning fs-1"></i>
+                    <div class="bg-white bg-opacity-10 rounded-4 p-3 mt-2">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="text-white">📍 Your Location</span>
+                            <span class="text-warning fw-bold"><i class="bi bi-lightning-charge"></i> 6 active riders</span>
+                        </div>
+                        <div class="progress-delivery bg-white bg-opacity-25 mt-2">
+                            <div class="bg-warning" style="width: 70%; height: 6px; border-radius: 10px;"></div>
+                        </div>
+                        <p class="text-white-50 small mt-2">Nearest delivery partner: 1.2km away</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- User Status Bar -->
+<div class="container mt-n4 position-relative z-1" data-aos="fade-up">
+    <div class="card border-0 shadow-lg rounded-4 overflow-hidden" id="userStatusCard">
+        <div class="p-4" style="background: linear-gradient(95deg, #ffffff, #fffbf5);">
+            <div class="d-flex justify-content-between align-items-center flex-wrap">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="bg-warning bg-opacity-10 rounded-circle p-3 pulse-animation">
+                        <i class="bi bi-fuel-pump-diesel fs-4 text-warning"></i>
+                    </div>
+                    <div>
+                        <h5 class="mb-0 fw-bold" id="greetingText">⚡ Ready for instant fuel?</h5>
+                        <p class="mb-0 text-muted small" id="userStatusSub">Login to unlock nearby bunks & 10-min delivery</p>
+                    </div>
+                </div>
+                <div class="mt-2 mt-sm-0">
+                    <span class="badge bg-dark rounded-pill px-3 py-2" id="authBadge"><i class="bi bi-lock-fill me-1"></i> Guest Mode</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Fuel Stations Grid - Premium -->
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-end mb-4 flex-wrap">
+        <div>
+            <h2 class="fw-bold"><i class="bi bi-building me-2 text-warning"></i> Trusted Fuel Partners</h2>
+            <p class="text-secondary">Verified stations • 10-min express delivery guarantee</p>
+        </div>
+        <div class="bg-light rounded-pill px-4 py-2">
+            <i class="bi bi-stopwatch"></i> Avg. delivery: <strong class="text-warning">9:42 min</strong>
+        </div>
+    </div>
+    <div class="row g-4" id="stationsGrid">
+        <!-- Dynamic station cards injected -->
+    </div>
+</div>
+
+<!-- Live Tracking Demo Section (after order) -->
+<div class="container mt-5 d-none" id="liveTrackingSection">
+    <div class="card fuel-card p-4 order-tracking-card">
+        <div class="d-flex align-items-center gap-3 flex-wrap">
+            <div class="bg-success rounded-circle p-3"><i class="bi bi-truck text-white fs-3"></i></div>
+            <div class="flex-grow-1">
+                <h5 class="fw-bold mb-1">🚚 Your fuel is on the way!</h5>
+                <p class="mb-0 text-muted" id="trackingMessage">Delivery executive assigned • ETA: <span id="etaCountdown">09:45</span></p>
+                <div class="progress mt-2" style="height: 8px;">
+                    <div class="progress-bar bg-warning" id="trackProgress" style="width: 15%;"></div>
+                </div>
+            </div>
+            <button class="btn btn-sm btn-outline-warning rounded-pill" id="cancelOrderBtn">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<!-- Premium Login Modal -->
+<div class="modal fade" id="loginPremiumModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content modal-premium">
+            <div class="modal-header border-0 pt-4 px-4">
+                <h4 class="modal-title fw-bold"><i class="bi bi-fuel-pump"></i> Welcome to FuelExpress</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body px-4 pb-4">
+                <form id="premiumLoginForm">
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Full Name</label>
+                        <input type="text" class="form-control" id="premiumName" placeholder="Rahul Mehta" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Mobile Number</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light border-0">+91</span>
+                            <input type="tel" class="form-control" id="premiumPhone" placeholder="98765 43210" required>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Delivery Address</label>
+                        <input type="text" class="form-control" id="premiumAddress" placeholder="Street, Landmark, City" required>
+                    </div>
+                    <div class="mb-4 form-check">
+                        <input type="checkbox" class="form-check-input" id="termsCheck" checked>
+                        <label class="form-check-label small">I agree to 10-min delivery T&C & location sharing</label>
+                    </div>
+                    <button type="submit" class="btn btn-fuel-primary w-100 py-3 fw-bold"><i class="bi bi-arrow-right-circle"></i> Login & Start Ordering</button>
+                </form>
+                <div class="text-center mt-3 small text-muted">🔒 100% secure • Instant doorstep fuel</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Buy Fuel Modal (Premium) -->
+<div class="modal fade" id="buyFuelPremiumModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content modal-premium">
+            <div class="modal-header bg-warning bg-opacity-10 border-0">
+                <h5 class="modal-title fw-bold"><i class="bi bi-cart-check-fill"></i> Confirm Fuel Order</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body p-4">
+                <div id="orderPreview">
+                    <div class="text-center mb-3">
+                        <i class="bi bi-fuel-pump-diesel fs-1 text-warning"></i>
+                        <h5 class="fw-bold mt-2" id="modalStationName">Station Name</h5>
+                    </div>
+                    <div class="bg-light p-3 rounded-4">
+                        <div class="row mb-2">
+                            <div class="col-6">Fuel Type:</div>
+                            <div class="col-6 fw-bold" id="modalFuelType">Premium Petrol</div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-6">Price / Liter:</div>
+                            <div class="col-6 fw-bold text-warning">₹<span id="modalPrice">106.50</span></div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-6">Quantity (Liters):</div>
+                            <div class="col-6"><input type="number" id="orderQuantity" class="form-control form-control-sm w-75" value="2" min="1" max="15" step="0.5"></div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-6">Delivery Fee:</div>
+                            <div class="col-6">₹29</div>
+                        </div>
+                        <hr>
+                        <div class="row fw-bold fs-5">
+                            <div class="col-6">Total:</div>
+                            <div class="col-6 text-success">₹<span id="orderTotal">0</span></div>
+                        </div>
+                    </div>
+                    <div class="mt-3 p-2 bg-info bg-opacity-10 rounded-3">
+                        <i class="bi bi-clock-history"></i> <strong>Guaranteed delivery in 10 minutes</strong> — live tracking enabled.
+                    </div>
+                </div>
+                <button class="btn btn-fuel-primary w-100 mt-4 py-3 fw-bold" id="finalConfirmOrderBtn"><i class="bi bi-check2-circle"></i> Place Order & Track</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Toast Notification -->
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1200">
+    <div id="globalToast" class="toast align-items-center text-bg-dark border-0" role="alert">
+        <div class="d-flex">
+            <div class="toast-body" id="toastMsg"></div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init({ duration: 800, once: true });
+
+    // Premium Fuel Stations Data
+    const fuelStationsData = [
+        { id: 1, name: "Indian Oil - XpressFuel", distance: "0.6 km", eta: "3 min", fuelType: "XP95 Premium Petrol", price: 108.50, rating: 4.9, imageIcon: "bi bi-fuel-pump-fill", deliveryBadge: "10 min guaranteed", stock: "High" },
+        { id: 2, name: "Bharat Petroleum - URJA", distance: "1.1 km", eta: "5 min", fuelType: "Speed 97 Octane", price: 112.30, rating: 4.8, imageIcon: "bi bi-shield-check", deliveryBadge: "Express", stock: "Available" },
+        { id: 3, name: "Reliance - JioPetro", distance: "1.8 km", eta: "7 min", fuelType: "Premium Diesel", price: 96.20, rating: 4.7, imageIcon: "bi bi-droplet-half", deliveryBadge: "Cashback 5%", stock: "Limited" },
+        { id: 4, name: "HPCL - Doorstep Hub", distance: "0.4 km", eta: "2 min", fuelType: "Hi-Octane Petrol", price: 115.00, rating: 4.95, imageIcon: "bi bi-lightning-charge", deliveryBadge: "Superfast", stock: "Ready" }
+    ];
+
+    let loggedInUser = null;
+    let activeOrder = null;
+    let orderTimer = null;
+    let currentStationForOrder = null;
+
+    // Render station cards
+    function renderStations() {
+        const container = document.getElementById('stationsGrid');
+        if (!container) return;
+        let cardsHtml = '';
+        fuelStationsData.forEach(station => {
+            cardsHtml += `
+                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="${station.id * 50}">
+                    <div class="fuel-card h-100 p-3">
+                        <div class="d-flex justify-content-between">
+                            <div class="bg-warning bg-opacity-10 rounded-circle p-2">
+                                <i class="${station.imageIcon} fs-3 text-warning"></i>
+                            </div>
+                            <span class="badge-delivery"><i class="bi bi-stopwatch"></i> ${station.eta}</span>
+                        </div>
+                        <div class="mt-3">
+                            <h5 class="fw-bold">${station.name}</h5>
+                            <div class="d-flex gap-2 mb-2">
+                                <span class="text-muted small"><i class="bi bi-geo-alt"></i> ${station.distance}</span>
+                                <span class="text-warning">★ ${station.rating}</span>
+                                <span class="text-success small">${station.stock}</span>
+                            </div>
+                            <p class="mb-1 fw-semibold">${station.fuelType}</p>
+                            <div class="price-tag fs-3 fw-bold">₹${station.price}<span class="fs-6 text-secondary">/L</span></div>
+                            <div class="small text-success bg-light d-inline-block px-2 py-1 rounded-3 mt-1">${station.deliveryBadge}</div>
+                        </div>
+                        <div class="mt-3">
+                            ${loggedInUser ? 
+                                `<button class="btn btn-fuel-primary w-100 buy-now-premium" data-id="${station.id}"><i class="bi bi-cart-fill"></i> Buy Now - 10 min Delivery</button>` : 
+                                `<button class="btn btn-outline-secondary w-100" disabled><i class="bi bi-lock"></i> Login to Order</button>`
+                            }
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+        container.innerHTML = cardsHtml;
+        
+        if (loggedInUser) {
+            document.querySelectorAll('.buy-now-premium').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const id = parseInt(btn.getAttribute('data-id'));
+                    const station = fuelStationsData.find(s => s.id === id);
+                    if (station) openBuyModal(station);
+                });
+            });
+        }
+    }
+
+    // Open buy modal with dynamic price
+    function openBuyModal(station) {
+        currentStationForOrder = station;
+        document.getElementById('modalStationName').innerText = station.name;
+        document.getElementById('modalFuelType').innerText = station.fuelType;
+        document.getElementById('modalPrice').innerText = station.price;
+        const qtyInput = document.getElementById('orderQuantity');
+        const updateTotal = () => {
+            let qty = parseFloat(qtyInput.value) || 1;
+            const total = (station.price * qty) + 29;
+            document.getElementById('orderTotal').innerText = total.toFixed(2);
+        };
+        updateTotal();
+        qtyInput.oninput = updateTotal;
+        const buyModal = new bootstrap.Modal(document.getElementById('buyFuelPremiumModal'));
+        buyModal.show();
+    }
+
+    // Place order & start live tracking simulation
+    function placeOrder(station, quantity) {
+        if (!loggedInUser) return false;
+        const totalAmount = (station.price * quantity) + 29;
+        activeOrder = {
+            station: station,
+            quantity: quantity,
+            total: totalAmount,
+            status: 'assigned',
+            startTime: Date.now(),
+            etaSeconds: 600
+        };
+        
+        // Show live tracking section
+        const trackingSection = document.getElementById('liveTrackingSection');
+        trackingSection.classList.remove('d-none');
+        
+        let remaining = 600; // 10 mins in seconds
+        const updateTimer = () => {
+            const elapsed = Math.floor((Date.now() - activeOrder.startTime) / 1000);
+            remaining = Math.max(0, 600 - elapsed);
+            const mins = Math.floor(remaining / 60);
+            const secs = remaining % 60;
+            document.getElementById('etaCountdown').innerText = `${mins.toString().padStart(2,'0')}:${secs.toString().padStart(2,'0')}`;
+            const progressPercent = ((600 - remaining) / 600) * 100;
+            document.getElementById('trackProgress').style.width = `${Math.min(100, progressPercent)}%`;
+            
+            if (remaining <= 0) {
+                clearInterval(orderTimer);
+                document.getElementById('trackingMessage').innerHTML = '✅ Fuel delivered successfully! Enjoy your ride.';
+                document.getElementById('trackProgress').style.width = '100%';
+                showToast('🎉 Fuel delivered! Thank you for choosing FuelExpress.', 'success');
+                setTimeout(() => {
+                    trackingSection.classList.add('d-none');
+                }, 5000);
+                activeOrder = null;
+            } else if (remaining <= 300) {
+                document.getElementById('trackingMessage').innerHTML = '🚗 Your delivery executive is nearby • Arriving any moment!';
+            } else {
+                document.getElementById('trackingMessage').innerHTML = `🛵 Delivery executive assigned • ETA: ${mins} min ${secs} sec`;
+            }
+        };
+        if (orderTimer) clearInterval(orderTimer);
+        updateTimer();
+        orderTimer = setInterval(updateTimer, 1000);
+        
+        showToast(`✅ Order placed! ${quantity}L ${station.fuelType} from ${station.name} will arrive in 10 mins.`, 'success');
+        return true;
+    }
+
+    function showToast(message, type = 'info') {
+        const toastEl = document.getElementById('globalToast');
+        const toastBody = document.getElementById('toastMsg');
+        toastBody.innerText = message;
+        toastEl.classList.remove('text-bg-dark', 'text-bg-success', 'text-bg-danger');
+        if (type === 'success') toastEl.classList.add('text-bg-success');
+        else if (type === 'danger') toastEl.classList.add('text-bg-danger');
+        else toastEl.classList.add('text-bg-dark');
+        const toast = new bootstrap.Toast(toastEl, { delay: 3500 });
+        toast.show();
+    }
+
+    // Update UI after login
+    function updateAfterLogin(user) {
+        loggedInUser = user;
+        document.getElementById('greetingText').innerHTML = `⛽ Welcome, ${user.name}! Ready to order?`;
+        document.getElementById('userStatusSub').innerHTML = `📍 ${user.address} • Fuel delivery in 10 mins`;
+        document.getElementById('authBadge').innerHTML = `<i class="bi bi-person-check-fill me-1"></i> ${user.name}`;
+        document.getElementById('authBadge').classList.remove('bg-dark');
+        document.getElementById('authBadge').classList.add('bg-success');
+        renderStations();
+        showToast(`Welcome back ${user.name}! Select any station to get fuel in 10 mins.`, 'success');
+    }
+
+    // Login handler
+    const loginForm = document.getElementById('premiumLoginForm');
+    if (loginForm) {
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('premiumName').value.trim();
+            const phone = document.getElementById('premiumPhone').value.trim();
+            const address = document.getElementById('premiumAddress').value.trim();
+            if (!name || !phone || !address) {
+                showToast('Please fill all fields', 'danger');
+                return;
+            }
+            if (phone.length < 10) {
+                showToast('Enter valid 10-digit mobile', 'danger');
+                return;
+            }
+            const user = { name, phone, address, loginTime: new Date() };
+            const modal = bootstrap.Modal.getInstance(document.getElementById('loginPremiumModal'));
+            modal.hide();
+            updateAfterLogin(user);
+        });
+    }
+
+    // Hero order button
+    document.getElementById('heroOrderBtn')?.addEventListener('click', () => {
+        if (!loggedInUser) {
+            const loginModal = new bootstrap.Modal(document.getElementById('loginPremiumModal'));
+            loginModal.show();
+        } else {
+            if (fuelStationsData.length) {
+                openBuyModal(fuelStationsData[0]);
+            }
+        }
+    });
+
+    // Confirm order final
+    document.getElementById('finalConfirmOrderBtn')?.addEventListener('click', () => {
+        if (!currentStationForOrder || !loggedInUser) return;
+        const qty = parseFloat(document.getElementById('orderQuantity').value);
+        if (isNaN(qty) || qty < 0.5) {
+            showToast('Enter valid quantity', 'danger');
+            return;
+        }
+        const buyModal = bootstrap.Modal.getInstance(document.getElementById('buyFuelPremiumModal'));
+        buyModal.hide();
+        placeOrder(currentStationForOrder, qty);
+        currentStationForOrder = null;
+    });
+
+    // Cancel order
+    document.getElementById('cancelOrderBtn')?.addEventListener('click', () => {
+        if (activeOrder) {
+            clearInterval(orderTimer);
+            activeOrder = null;
+            document.getElementById('liveTrackingSection').classList.add('d-none');
+            showToast('Order cancelled. Refund will be processed.', 'danger');
+        }
+    });
+
+    // Initial render (guest)
+    renderStations();
+    
+    // Prefill login modal for demo ease
+    const demoFill = () => {
+        if(document.getElementById('premiumName')) {
+            document.getElementById('premiumName').value = 'Vikram Singh';
+            document.getElementById('premiumPhone').value = '9876543210';
+            document.getElementById('premiumAddress').value = 'Sector 62, Noida';
+        }
+    };
+    demoFill();
+</script>
+</body>
+</html>
