@@ -1,0 +1,19 @@
+<form id="school">
+
+    <input type="text" id="userName" placeholder="Enter Name">
+    <button type="submit">submit</button>
+
+
+</form>
+
+      <p id="output"></p>
+
+   <script>
+    document.getElementById("school").addEventListener("submit" , (e)=> {
+         e.preventDefault();
+
+         let name = document.getElementById("userName").value;
+         document.getElementById("output").textContent = name;
+
+    });
+   </script>   

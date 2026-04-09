@@ -1,0 +1,22 @@
+<input type="password" id="password">
+<button id="btn">show</button>
+
+
+<script>
+    let password = document.getElementById("password");
+    let btn = document.getElementById("btn");
+
+
+    btn.addEventListener("click" , () => {
+        if (password.type ==="password") {
+            password.type ="text";
+            btn.textContent = "Hide";
+
+           } else {
+        password.type = "password";
+        btn.textContent = "Show";
+
+             }
+        }
+    )
+</script>
