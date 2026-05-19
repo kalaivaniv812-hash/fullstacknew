@@ -1,0 +1,38 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.parent {
+
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    background-color: black;
+    color: white;
+    padding: 20px;
+    border: 5px double gray;
+
+}
+
+.parent a {
+     
+    margin-left: 15px;
+    align-items: center;
+
+}
+
+.parent img {
+
+  height: 30px;
+  
+}
+
+
+.name img {
+    height: 70%;
+    width: 100%;
+    padding: 50px;
+    margin: 2px;
+}

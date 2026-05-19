@@ -1,0 +1,18 @@
+<input type="text" id="name" placeholder="Enter you name">
+<input type="email" id="email" placeholder="Enter you Email">
+<button onclick="register()">Register</button>
+
+
+<script>
+    function register() {
+        let name = document.getElementById("name").value;
+        let email = document.getElementById("email").value;
+
+        let user ={
+            name :name,
+            email : email
+        };
+        
+         localStorage.setItem("userData",JSON.stringify(user));
+    }
+</script>

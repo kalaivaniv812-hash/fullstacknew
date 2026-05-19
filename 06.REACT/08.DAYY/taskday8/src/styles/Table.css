@@ -1,0 +1,157 @@
+/* Table Container */
+.table-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Title */
+.table-title {
+    color: white;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+/* Table Styling */
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Header */
+.styled-table thead tr {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.styled-table th {
+    padding: 16px 18px;
+    text-align: left;
+    font-size: 14px;
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.styled-table th:last-child {
+    border-right: none;
+}
+
+/* Body */
+.styled-table tbody tr {
+    border-bottom: 1px solid #e0e0e0;
+    transition: all 0.3s ease;
+}
+
+.styled-table tbody tr:hover {
+    background-color: #f5f5ff;
+    transform: scale(1.01);
+    box-shadow: inset 0 2px 8px rgba(102, 126, 234, 0.1);
+}
+
+.styled-table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.styled-table td {
+    padding: 14px 18px;
+    font-size: 15px;
+    color: #333;
+}
+
+/* Completed Row */
+.completed-row {
+    opacity: 0.75;
+}
+
+.completed-row td {
+    color: #999;
+}
+
+/* Task Title Column */
+.task-title {
+    font-weight: 500;
+    color: #667eea;
+    max-width: 300px;
+    word-wrap: break-word;
+}
+
+/* Status Column */
+.status {
+    font-weight: 600;
+    padding: 8px 12px;
+    border-radius: 6px;
+    display: inline-block;
+    text-align: center;
+    min-width: 100px;
+}
+
+.status.completed {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.status.pending {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+/* Loading State */
+.loading {
+    text-align: center;
+    padding: 40px;
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.6;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .table-container {
+        width: 95%;
+        margin: 20px auto;
+        padding: 15px;
+    }
+
+    .table-title {
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+
+    .styled-table {
+        font-size: 14px;
+    }
+
+    .styled-table th,
+    .styled-table td {
+        padding: 10px 8px;
+        font-size: 13px;
+    }
+
+    .task-title {
+        max-width: 150px;
+    }
+}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>form validation</title>
+</head>
+<body>
+    <form id="My Form"></form>
+    <input type="text" id="Name" placeholder="Enter Your Name">
+    <input type="text" id="Email" placeholder="Enter Your Email">
+    <input type="text" id="Number" placeholder="Enter Your Number">
+
+    <p id="error" style="color: rgb(32, 142, 5);"></p>
+    <button type="submit">Submit</button>
+
+
+    <script>
+        const form = document.getElementById(MyForm);
+        const nameinput = document.getElementById(Name);
+        const email = document.getElementById(Email)
+        const number = document.getElementById(Number)
+        const erroEI = document.getElementById(error)
+
+        form.addEventListener("submit",(e){
+            e.preventDefault();
+
+            if (nameinput.value.trim()===""){
+                errorEI.textcontent ="Name is required";
+
+            }else{
+                errorEI.textcontent ="";
+                form.submit();
+            }
+        })
+
+    </script>
+
+</body>
+</html>

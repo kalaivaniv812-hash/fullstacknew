@@ -1,0 +1,191 @@
+/* Timer Container */
+.timer-container {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Timer Card */
+.timer-card {
+    background: white;
+    border-radius: 20px;
+    padding: 50px 40px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    min-width: 400px;
+    animation: slideIn 0.5s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Title */
+.timer-title {
+    font-size: 32px;
+    color: #667eea;
+    margin-bottom: 30px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+/* Timer Display */
+.timer-display {
+    font-size: 72px;
+    font-weight: 900;
+    color: #764ba2;
+    font-family: 'Courier New', monospace;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 30px 0;
+    letter-spacing: 4px;
+    line-height: 1.2;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Timer Info */
+.timer-info {
+    margin: 20px 0;
+    font-size: 16px;
+    color: #666;
+}
+
+.timer-info p {
+    margin: 8px 0;
+}
+
+/* Buttons */
+.timer-buttons {
+    display: flex;
+    gap: 12px;
+    margin: 30px 0;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 12px 28px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.btn:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn-start {
+    background: linear-gradient(135deg, #52c234 0%, #3aa819 100%);
+    color: white;
+}
+
+.btn-start:hover:not(:disabled) {
+    background: linear-gradient(135deg, #3aa819 0%, #2a7a0f 100%);
+}
+
+.btn-stop {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+    color: white;
+}
+
+.btn-stop:hover:not(:disabled) {
+    background: linear-gradient(135deg, #ee5a52 0%, #d43f2e 100%);
+}
+
+.btn-reset {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.btn-reset:hover:not(:disabled) {
+    background: linear-gradient(135deg, #764ba2 0%, #5a3380 100%);
+}
+
+/* Timer Status */
+.timer-status {
+    margin-top: 20px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.status-running {
+    color: #52c234;
+    animation: pulse 1s infinite;
+}
+
+.status-paused {
+    color: #ffc107;
+}
+
+.status-stopped {
+    color: #ff6b6b;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.6;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .timer-container {
+        padding: 20px;
+    }
+
+    .timer-card {
+        min-width: 100%;
+        padding: 30px 20px;
+    }
+
+    .timer-title {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    .timer-display {
+        font-size: 48px;
+        letter-spacing: 2px;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+
+    .timer-buttons {
+        gap: 10px;
+    }
+}

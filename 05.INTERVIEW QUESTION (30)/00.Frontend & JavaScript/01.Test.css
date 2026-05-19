@@ -1,0 +1,27 @@
+.row {
+    background-color: rgb(102, 7, 7);
+    color: aliceblue;
+    border: 2px solid yellowgreen;
+    margin: 2px;
+    padding: 20px;
+   text-align: center;
+}
+
+
+.row1 {
+    background-color: black;
+    border: 5px double greenyellow;
+    
+
+}
+
+.row2 {
+    background-color: black;
+    border: 5px double greenyellow;
+}
+
+
+.row3 {
+    background-color: black;
+    border: 5px double greenyellow;
+}

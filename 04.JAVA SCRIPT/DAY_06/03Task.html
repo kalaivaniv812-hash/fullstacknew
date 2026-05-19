@@ -1,0 +1,9 @@
+<script>
+    function calculate(a, b, callback) {
+    console.log(callback(a, b));
+}
+
+calculate(4, 5, function(x, y) {
+    return x * y;
+});
+</script>

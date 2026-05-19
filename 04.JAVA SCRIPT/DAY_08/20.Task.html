@@ -1,0 +1,9 @@
+<script>
+    let cart = [
+  {item: "Pen", price: 10},
+  {item: "Book", price: 50}
+];
+
+let total = cart.reduce((sum, item) => sum + item.price, 0);
+console.log(total); // 60
+</script>
